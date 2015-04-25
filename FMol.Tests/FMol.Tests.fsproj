@@ -51,6 +51,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Compile Include="FsCheckAddin.fs" />
+    <Compile Include="FsCheckTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsCheck">
