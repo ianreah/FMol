@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FMol", "FMol\FMol.fsproj", "{C4762536-A177-4F9A-ABFE-EC681F7B720F}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FMol.Tests", "FMol.Tests\FMol.Tests.fsproj", "{C494CE3F-8A77-4984-858C-A0A42CFD316B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C4762536-A177-4F9A-ABFE-EC681F7B720F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4762536-A177-4F9A-ABFE-EC681F7B720F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4762536-A177-4F9A-ABFE-EC681F7B720F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C494CE3F-8A77-4984-858C-A0A42CFD316B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C494CE3F-8A77-4984-858C-A0A42CFD316B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C494CE3F-8A77-4984-858C-A0A42CFD316B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C494CE3F-8A77-4984-858C-A0A42CFD316B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
