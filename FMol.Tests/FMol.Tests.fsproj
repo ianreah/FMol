@@ -53,6 +53,7 @@
     <Content Include="packages.config" />
     <Compile Include="FsCheckAddin.fs" />
     <Compile Include="FsCheckTest.fs" />
+    <Compile Include="ParserTestHelper.fs" />
     <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup>
