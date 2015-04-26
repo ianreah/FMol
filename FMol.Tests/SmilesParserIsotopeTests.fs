@@ -2,6 +2,10 @@
 
 open System
 open FsCheck
+open FsCheck.NUnit
+
+open FMol.Tests.ParserTestHelper
+open FMol.SmilesParserPrimitives
 
 let validIsotopeGenerator = gen {
     // A general-purpose SMILES parser must accept at least three digits
@@ -27,3 +31,15 @@ let invalidIsotopeGenerator = gen {
     let! s = Gen.suchThat (fun x -> x <> Unchecked.defaultof<string>) Arb.generate<string>
     return s.TrimStart([| '0'..'9' |])
 }
+
+[<PropertyAttribute>]
+let validIsotopeSucceeds() =
+    Prop.forAll (Arb.fromGen validIsotopeGenerator) (testParserSucceedsWith isotope)
+
+[<PropertyAttribute>]
+let isotopeOutOfRangeFails() =
+    Prop.forAll (Arb.fromGen outOfRangeIsotopeGenerator) (testParserFails isotope)
+
+[<PropertyAttribute>]
+let invalidIsotopeFails() =
+    Prop.forAll (Arb.fromGen invalidIsotopeGenerator) (testParserFails isotope)
