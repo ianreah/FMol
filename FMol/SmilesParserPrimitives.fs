@@ -25,3 +25,6 @@ let elementSymbol:Parser<string, unit> =
             pstring "No"; pstring "Lr"; pstring  "H"; pstring  "B"; pstring  "C"; pstring  "N"; pstring  "O";
             pstring  "F"; pstring  "P"; pstring  "S"; pstring  "K"; pstring  "V"; pstring  "Y"; pstring  "I";
             pstring  "W"; pstring  "U"]
+
+let aromaticSymbol:Parser<string, unit> =
+    choice [pstring "b"; pstring "c"; pstring "n"; pstring "o"; pstring "p"; pstring "se"; pstring "s"; pstring "as"]

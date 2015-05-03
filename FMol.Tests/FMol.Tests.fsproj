@@ -57,6 +57,7 @@
     <Content Include="app.config" />
     <Compile Include="SmilesParserIsotopeTests.fs" />
     <Compile Include="SmilesParserElementSymbolTests.fs" />
+    <Compile Include="SmilesParserAromaticSymbolTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FParsec">
