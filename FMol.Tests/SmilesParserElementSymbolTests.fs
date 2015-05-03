@@ -4,6 +4,7 @@ open FsCheck
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
+open FMol.Tests.Generators
 open FMol.SmilesParserPrimitives
 
 let elementSymbols =
@@ -18,16 +19,8 @@ let elementSymbols =
      "Tm"; "Yb"; "Lu"; "Ac"; "Th"; "Pa";  "U"; "Np"; "Pu"; "Am"; "Cm"; "Bk";
      "Cf"; "Es"; "Fm"; "Md"; "No"; "Lr"]
 
-let elementSymbolGenerator = gen {
-    let! i = Gen.choose (0, List.length elementSymbols-1)
-    let symbol = (List.nth elementSymbols i)
-    return (symbol, symbol)
-}
-
-let notAnElementSymbolGenerator =
-    let startsWithAnElementSymbol (s:string) =
-        elementSymbols |> List.exists (fun x -> s.StartsWith x)
-    Gen.suchThat (fun x -> x <> Unchecked.defaultof<string> && not (x |> startsWithAnElementSymbol)) Arb.generate<string>
+let elementSymbolGenerator = parserInputOutputChoice elementSymbols
+let notAnElementSymbolGenerator = notAnOptionGenerator elementSymbols
 
 [<PropertyAttribute>]
 let validElementSucceeds() =

@@ -53,6 +53,7 @@
     <Content Include="packages.config" />
     <Compile Include="FsCheckAddin.fs" />
     <Compile Include="ParserTestHelper.fs" />
+    <Compile Include="Generators.fs" />
     <Content Include="app.config" />
     <Compile Include="SmilesParserIsotopeTests.fs" />
     <Compile Include="SmilesParserElementSymbolTests.fs" />
