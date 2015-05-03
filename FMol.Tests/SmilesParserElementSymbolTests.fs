@@ -1,6 +1,10 @@
 ﻿module FMol.Tests.SmilesParserElementSymbolTests
 
 open FsCheck
+open FsCheck.NUnit
+
+open FMol.Tests.ParserTestHelper
+open FMol.SmilesParserPrimitives
 
 let elementSymbols =
     [ "H"; "He"; "Li"; "Be";  "B";  "C";  "N";  "O";  "F"; "Ne"; "Na"; "Mg";
@@ -25,3 +29,10 @@ let notAnElementSymbolGenerator =
         elementSymbols |> List.exists (fun x -> s.StartsWith x)
     Gen.suchThat (fun x -> x <> Unchecked.defaultof<string> && not (x |> startsWithAnElementSymbol)) Arb.generate<string>
 
+[<PropertyAttribute>]
+let validElementSucceeds() =
+    Prop.forAll (Arb.fromGen elementSymbolGenerator) (testParserSucceedsWith elementSymbol)
+
+[<PropertyAttribute>]
+let invalidElementFails() =
+    Prop.forAll (Arb.fromGen notAnElementSymbolGenerator) (testParserFails elementSymbol)
