@@ -7,11 +7,6 @@ let choiceGenerator options = gen {
     return (List.nth options i)
 }
 
-let parserInputOutputChoice options = gen {
-    let! choice = choiceGenerator options
-    return (choice, choice)
-}
-
 let notAnOptionGenerator options = 
     let startsWithAChoice (s:string) = 
         options |> List.exists (fun x -> s.StartsWith x)

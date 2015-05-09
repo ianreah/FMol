@@ -8,12 +8,12 @@ open FMol.Tests.Generators
 open FMol.SmilesParserPrimitives
 
 let aromaticSymbols = ["b"; "c"; "n"; "o"; "p"; "s"; "se"; "as"]
-let aromaticSymbolGenerator = parserInputOutputChoice aromaticSymbols
+let aromaticSymbolGenerator = choiceGenerator aromaticSymbols
 let notAnAromaticSymbolGenerator = notAnOptionGenerator aromaticSymbols
 
 [<PropertyAttribute>]
 let validAromaticSymbolSucceeds() =
-    Prop.forAll (Arb.fromGen aromaticSymbolGenerator) (testParserSucceedsWith aromaticSymbol)
+    Prop.forAll (Arb.fromGen aromaticSymbolGenerator) (testParserSucceedsWithInput aromaticSymbol)
 
 [<PropertyAttribute>]
 let invalidAromaticSymbolFails() =

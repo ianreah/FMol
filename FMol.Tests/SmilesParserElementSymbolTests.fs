@@ -19,12 +19,12 @@ let elementSymbols =
      "Tm"; "Yb"; "Lu"; "Ac"; "Th"; "Pa";  "U"; "Np"; "Pu"; "Am"; "Cm"; "Bk";
      "Cf"; "Es"; "Fm"; "Md"; "No"; "Lr"]
 
-let elementSymbolGenerator = parserInputOutputChoice elementSymbols
+let elementSymbolGenerator = choiceGenerator elementSymbols
 let notAnElementSymbolGenerator = notAnOptionGenerator elementSymbols
 
 [<PropertyAttribute>]
 let validElementSucceeds() =
-    Prop.forAll (Arb.fromGen elementSymbolGenerator) (testParserSucceedsWith elementSymbol)
+    Prop.forAll (Arb.fromGen elementSymbolGenerator) (testParserSucceedsWithInput elementSymbol)
 
 [<PropertyAttribute>]
 let invalidElementFails() =
