@@ -26,3 +26,12 @@ let elementSymbol:Parser<string, unit> =
 
 let aromaticSymbol:Parser<string, unit> =
     choice [pstring "b"; pstring "c"; pstring "n"; pstring "o"; pstring "p"; pstring "se"; pstring "s"; pstring "as"]
+
+let chiral:Parser<string, unit> =
+    let chiralUtil(prefix, min, max) =
+        prefixSuffix (pstring prefix) (pint32Range min max)
+    let chiralParsers = 
+        ["@TH", 1, 2; "@AL", 1, 2; "@SP", 1, 3; "@TB", 1, 99; "@OH", 1, 99] |> List.map chiralUtil
+    let chiralShorthandParsers =
+        [pstring "@@"; pstring "@"]
+    choice (chiralParsers @ chiralShorthandParsers)

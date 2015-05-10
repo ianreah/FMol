@@ -58,6 +58,7 @@
     <Compile Include="SmilesParserIsotopeTests.fs" />
     <Compile Include="SmilesParserElementSymbolTests.fs" />
     <Compile Include="SmilesParserAromaticSymbolTests.fs" />
+    <Compile Include="SmilesParserChiralityTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FParsec">
