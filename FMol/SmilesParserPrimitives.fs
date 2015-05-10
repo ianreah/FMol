@@ -1,11 +1,9 @@
 ﻿module FMol.SmilesParserPrimitives
 
 open FParsec
+open FMol.Parsers
 
-let isotope:Parser<uint32, unit> = parse {
-    let! n = puint32
-    if n <= 999u then return n
-}
+let isotope:Parser<int32, unit> = pint32Range 0 999
 
 let elementSymbol:Parser<string, unit> = 
     choice [pstring "He"; pstring "Li"; pstring "Be"; pstring "Ne"; pstring "Na"; pstring "Mg"; pstring "Al";

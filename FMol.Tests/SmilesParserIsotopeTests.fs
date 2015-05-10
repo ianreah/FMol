@@ -18,7 +18,7 @@ let validIsotopeGenerator = gen {
     let! zeroCount = if padWithZeros then Arb.generate<uint32> else (Gen.constant 0u)
     let parserInput = String.Format("{0}{1}", (String.replicate (int zeroCount) "0"), validIsotope)
 
-    return parserInput, (uint32 validIsotope);
+    return parserInput, validIsotope;
 }
 
 let outOfRangeIsotopeGenerator = gen {
