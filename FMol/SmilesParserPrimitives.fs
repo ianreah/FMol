@@ -35,3 +35,5 @@ let chiral:Parser<string, unit> =
     let chiralShorthandParsers =
         [pstring "@@"; pstring "@"]
     choice (chiralParsers @ chiralShorthandParsers)
+
+let hcount:Parser<int, unit> = pchar 'H' >>. ((digit |>> (string >> int)) <|>% 1)
