@@ -5,6 +5,7 @@ open FsCheck
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
+open FMol.Tests.Generators
 open FMol.SmilesParserPrimitives
 
 let validIsotopeGenerator = gen {
@@ -27,10 +28,7 @@ let outOfRangeIsotopeGenerator = gen {
     return invalidIsotope.ToString()
 } 
 
-let invalidIsotopeGenerator = gen {
-    let! s = Gen.suchThat (fun x -> x <> Unchecked.defaultof<string>) Arb.generate<string>
-    return s.TrimStart([| '0'..'9' |])
-}
+let invalidIsotopeGenerator = notStartWithGenerator [| '0'..'9' |]
 
 [<PropertyAttribute>]
 let validIsotopeSucceeds() =
