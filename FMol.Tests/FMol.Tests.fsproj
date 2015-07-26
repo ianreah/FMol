@@ -60,6 +60,7 @@
     <Compile Include="SmilesParserAromaticSymbolTests.fs" />
     <Compile Include="SmilesParserChiralityTests.fs" />
     <Compile Include="SmilesParserHcountTests.fs" />
+    <Compile Include="SmilesParserChargeTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FParsec">

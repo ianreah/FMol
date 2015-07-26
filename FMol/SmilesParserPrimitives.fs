@@ -37,3 +37,13 @@ let chiral:Parser<string, unit> =
     choice (chiralParsers @ chiralShorthandParsers)
 
 let hcount:Parser<int, unit> = pchar 'H' >>. ((digit |>> (string >> int)) <|>% 1)
+
+let charge:Parser<int, unit> =
+    let sign:Parser<int->int, unit> =
+        (pchar '+' >>. preturn id) <|>
+        (pchar '-' >>. preturn ((*)-1))
+    parse {
+        let! signFunction = sign
+        let! n = ((pint32Range 0 15) <|>% 1)
+        return signFunction n
+    }
