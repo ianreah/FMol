@@ -6,26 +6,26 @@ open FMol.Parsers
 let isotope:Parser<int32, unit> = pint32Range 0 999
 
 let elementSymbol:Parser<string, unit> = 
-    choice [pstring "He"; pstring "Li"; pstring "Be"; pstring "Ne"; pstring "Na"; pstring "Mg"; pstring "Al";
-            pstring "Si"; pstring "Cl"; pstring "Ar"; pstring "Ca"; pstring "Sc"; pstring "Ti"; pstring "Cr";
-            pstring "Mn"; pstring "Fe"; pstring "Co"; pstring "Ni"; pstring "Cu"; pstring "Zn"; pstring "Ga";
-            pstring "Ge"; pstring "As"; pstring "Se"; pstring "Br"; pstring "Kr"; pstring "Rb"; pstring "Sr";
-            pstring "Zr"; pstring "Nb"; pstring "Mo"; pstring "Tc"; pstring "Ru"; pstring "Rh"; pstring "Pd";
-            pstring "Ag"; pstring "Cd"; pstring "In"; pstring "Sn"; pstring "Sb"; pstring "Te"; pstring "Xe";
-            pstring "Cs"; pstring "Ba"; pstring "Hf"; pstring "Ta"; pstring "Re"; pstring "Os"; pstring "Ir";
-            pstring "Pt"; pstring "Au"; pstring "Hg"; pstring "Tl"; pstring "Pb"; pstring "Bi"; pstring "Po";
-            pstring "At"; pstring "Rn"; pstring "Fr"; pstring "Ra"; pstring "Rf"; pstring "Db"; pstring "Sg";
-            pstring "Bh"; pstring "Hs"; pstring "Mt"; pstring "Ds"; pstring "Rg"; pstring "Cn"; pstring "Fl";
-            pstring "Lv"; pstring "La"; pstring "Ce"; pstring "Pr"; pstring "Nd"; pstring "Pm"; pstring "Sm";
-            pstring "Eu"; pstring "Gd"; pstring "Tb"; pstring "Dy"; pstring "Ho"; pstring "Er"; pstring "Tm";
-            pstring "Yb"; pstring "Lu"; pstring "Ac"; pstring "Th"; pstring "Pa"; pstring "Np"; pstring "Pu";
-            pstring "Am"; pstring "Cm"; pstring "Bk"; pstring "Cf"; pstring "Es"; pstring "Fm"; pstring "Md";
-            pstring "No"; pstring "Lr"; pstring  "H"; pstring  "B"; pstring  "C"; pstring  "N"; pstring  "O";
-            pstring  "F"; pstring  "P"; pstring  "S"; pstring  "K"; pstring  "V"; pstring  "Y"; pstring  "I";
-            pstring  "W"; pstring  "U"]
+    stringChoice ["He"; "Li"; "Be"; "Ne"; "Na"; "Mg"; "Al";
+                  "Si"; "Cl"; "Ar"; "Ca"; "Sc"; "Ti"; "Cr";
+                  "Mn"; "Fe"; "Co"; "Ni"; "Cu"; "Zn"; "Ga";
+                  "Ge"; "As"; "Se"; "Br"; "Kr"; "Rb"; "Sr";
+                  "Zr"; "Nb"; "Mo"; "Tc"; "Ru"; "Rh"; "Pd";
+                  "Ag"; "Cd"; "In"; "Sn"; "Sb"; "Te"; "Xe";
+                  "Cs"; "Ba"; "Hf"; "Ta"; "Re"; "Os"; "Ir";
+                  "Pt"; "Au"; "Hg"; "Tl"; "Pb"; "Bi"; "Po";
+                  "At"; "Rn"; "Fr"; "Ra"; "Rf"; "Db"; "Sg";
+                  "Bh"; "Hs"; "Mt"; "Ds"; "Rg"; "Cn"; "Fl";
+                  "Lv"; "La"; "Ce"; "Pr"; "Nd"; "Pm"; "Sm";
+                  "Eu"; "Gd"; "Tb"; "Dy"; "Ho"; "Er"; "Tm";
+                  "Yb"; "Lu"; "Ac"; "Th"; "Pa"; "Np"; "Pu";
+                  "Am"; "Cm"; "Bk"; "Cf"; "Es"; "Fm"; "Md";
+                  "No"; "Lr";  "H";  "B";  "C";  "N";  "O";
+                   "F";  "P";  "S";  "K";  "V";  "Y";  "I";
+                   "W";  "U"]
 
 let aromaticSymbol:Parser<string, unit> =
-    choice [pstring "b"; pstring "c"; pstring "n"; pstring "o"; pstring "p"; pstring "se"; pstring "s"; pstring "as"]
+    stringChoice ["b"; "c"; "n"; "o"; "p"; "se"; "s"; "as"]
 
 let chiral:Parser<string, unit> =
     let chiralUtil(prefix, min, max) =

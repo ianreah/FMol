@@ -13,3 +13,5 @@ let prefixSuffix pPrefix pSuffix = parse {
     let! suffix = pSuffix
     return String.Format("{0}{1}", prefix, suffix)
 }
+
+let stringChoice:string list->Parser<string, unit> = List.map pstring >> choice
