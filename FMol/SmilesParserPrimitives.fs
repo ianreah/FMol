@@ -47,3 +47,5 @@ let charge:Parser<int, unit> =
         let! n = ((pint32Range 0 15) <|>% 1)
         return signFunction n
     }
+
+let atomClass:Parser<int, unit> =  pchar ':' >>. pint32
