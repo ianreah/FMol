@@ -49,3 +49,6 @@ let charge:Parser<int, unit> =
     }
 
 let atomClass:Parser<int, unit> =  pchar ':' >>. pint32
+
+let aliphatic_organic:Parser<string, unit> = stringChoice ["Cl"; "Br"; "B"; "C"; "N"; "O"; "S"; "P"; "F"; "I"]
+let aromatic_organic:Parser<string, unit> = stringChoice ["b"; "c"; "n"; "o"; "s"; "p"]
