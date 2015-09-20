@@ -1,4 +1,4 @@
-﻿module SmilesParserAtomClassTests
+﻿module Fmol.Tests.SmilesParserAtomClassTests
 
 open System
 open FsCheck

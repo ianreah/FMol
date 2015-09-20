@@ -1,4 +1,4 @@
-﻿module SmilesParserAromaticSymbolTests
+﻿module FMol.Tests.SmilesParserAromaticSymbolTests
 
 open FsCheck
 open FsCheck.NUnit
