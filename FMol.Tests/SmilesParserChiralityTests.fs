@@ -6,16 +6,9 @@ open NUnit.Framework
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
-open FMol.Tests.GeneratorHelpers
-
+open FMol.Tests.SmilesGenerators
 open FMol.SmilesParserPrimitives
 
-let chiralityGenerator = gen {
-    let! prefix, min, max = choiceGenerator [("@", 0, 0); ("@@", 0, 0); ("@TH", 1, 2); ("@AL", 1, 2); ("@SP", 1, 3); ("@TB", 1, 99); ("@OH", 1, 99)]
-    let! n = Gen.choose (min, max)
-    if n=0 then return prefix
-    else return String.Format("{0}{1}", prefix, n)
-}
 
 [<Test>]
 let parsesClockwiseChiralityShorthand() =

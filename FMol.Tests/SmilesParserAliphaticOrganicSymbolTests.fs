@@ -4,13 +4,9 @@ open FsCheck
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
-open FMol.Tests.GeneratorHelpers
+open FMol.Tests.SmilesGenerators
 open FMol.SmilesParserPrimitives
 
-let aliphaticOrganicSymbols = ["Cl"; "Br"; "B"; "C"; "N"; "O"; "S"; "P"; "F"; "I"]
-
-let aliphaticOrganicSymbolGenerator = choiceGenerator aliphaticOrganicSymbols
-let notAliphaticOrganicSymbolGenerator = notAnOptionGenerator aliphaticOrganicSymbols
 
 [<PropertyAttribute>]
 let validSymbolSucceeds() =

@@ -4,13 +4,9 @@ open FsCheck
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
-open FMol.Tests.GeneratorHelpers
+open FMol.Tests.SmilesGenerators
 open FMol.SmilesParserPrimitives
 
-let aromaticOrganicSymbols = ["b"; "c"; "n"; "o"; "s"; "p"]
-
-let aromaticOrganicSymbolGenerator = choiceGenerator aromaticOrganicSymbols
-let notAnAromaticOrganicSymbolGenerator = notAnOptionGenerator aromaticOrganicSymbols
 
 [<PropertyAttribute>]
 let validSymbolSucceeds() =
