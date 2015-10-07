@@ -4,7 +4,7 @@ open FsCheck
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
-open FMol.Tests.Generators
+open FMol.Tests.GeneratorHelpers
 open FMol.SmilesParserPrimitives
 
 let aliphaticOrganicSymbols = ["Cl"; "Br"; "B"; "C"; "N"; "O"; "S"; "P"; "F"; "I"]

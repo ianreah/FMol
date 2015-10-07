@@ -4,7 +4,7 @@ open System
 open FsCheck
 open FsCheck.NUnit
 
-open FMol.Tests.Generators
+open FMol.Tests.GeneratorHelpers
 open FMol.Tests.ParserTestHelper
 open FMol.SmilesParserPrimitives
 

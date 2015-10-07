@@ -1,4 +1,4 @@
-﻿module FMol.Tests.Generators
+﻿module FMol.Tests.GeneratorHelpers
 
 open System
 open FsCheck

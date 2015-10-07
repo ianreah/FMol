@@ -5,7 +5,7 @@ open FsCheck
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
-open FMol.Tests.Generators
+open FMol.Tests.GeneratorHelpers
 open FMol.SmilesParserPrimitives
 
 let hCountGenerator = gen {

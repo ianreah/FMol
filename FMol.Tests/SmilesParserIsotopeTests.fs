@@ -5,7 +5,7 @@ open FsCheck
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
-open FMol.Tests.Generators
+open FMol.Tests.GeneratorHelpers
 open FMol.SmilesParserPrimitives
 
 // A general-purpose SMILES parser must accept at least three digits
