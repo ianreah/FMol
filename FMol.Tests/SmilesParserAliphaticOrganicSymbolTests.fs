@@ -1,16 +1,16 @@
 ﻿module FMol.Tests.SmilesParserAliphaticOrganicSymbolTests
 
 open FsCheck
+open NUnit.Framework
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
 open FMol.Tests.SmilesGenerators
 open FMol.SmilesParserPrimitives
 
-
-[<PropertyAttribute>]
+[<Test>]
 let validSymbolSucceeds() =
-    Prop.forAll (Arb.fromGen aliphaticOrganicSymbolGenerator) (testParserSucceedsWithInput aliphatic_organic)
+    Assert.IsTrue(testParserSucceedsWithAllOptions aliphatic_organic aliphaticOrganicSymbols)
 
 [<PropertyAttribute>]
 let invalidSymbolFails() =

@@ -7,6 +7,9 @@ let private testParser parser input successAction failureAction =
     | Success(result, state, position) -> successAction(result, state, position)
     | Failure(message, error, state) -> failureAction(message, error, state)
 
+let private allTestsAreTrue test input =
+    input |> List.map test |> List.forall ((=)true)
+
 // The parser should successfully parse the input
 // and the result should be equal to 'expected'
 let testParserSucceedsWith parser (input, expected) =
@@ -20,3 +23,8 @@ let testParserSucceedsWithInput parser input =
 // The parser should fail to parse the input
 let testParserFails parser input =
     testParser parser input (fun _ -> false) (fun _ -> true)
+
+// The parser should successfully parse each of the input options
+// and for each option the result should simply be the input option
+let testParserSucceedsWithAllOptions parser options =
+    allTestsAreTrue (testParserSucceedsWithInput parser) options

@@ -1,6 +1,7 @@
 ﻿module FMol.Tests.SmilesParserAromaticSymbolTests
 
 open FsCheck
+open NUnit.Framework
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
@@ -8,9 +9,9 @@ open FMol.Tests.SmilesGenerators
 open FMol.SmilesParserPrimitives
 
 
-[<PropertyAttribute>]
+[<Test>]
 let validAromaticSymbolSucceeds() =
-    Prop.forAll (Arb.fromGen aromaticSymbolGenerator) (testParserSucceedsWithInput aromaticSymbol)
+    Assert.IsTrue(testParserSucceedsWithAllOptions aromaticSymbol aromaticSymbols)
 
 [<PropertyAttribute>]
 let invalidAromaticSymbolFails() =

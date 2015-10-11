@@ -1,16 +1,16 @@
 ﻿module FMol.Tests.SmilesParserElementSymbolTests
 
 open FsCheck
+open NUnit.Framework
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
 open FMol.Tests.SmilesGenerators
 open FMol.SmilesParserPrimitives
 
-
-[<PropertyAttribute>]
+[<Test>]
 let validElementSucceeds() =
-    Prop.forAll (Arb.fromGen elementSymbolGenerator) (testParserSucceedsWithInput elementSymbol)
+    testParserSucceedsWithAllOptions elementSymbol elementSymbols
 
 [<PropertyAttribute>]
 let invalidElementFails() =
