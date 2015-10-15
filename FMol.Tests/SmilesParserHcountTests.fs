@@ -2,16 +2,17 @@
 
 open System
 open FsCheck
+open NUnit.Framework
 open FsCheck.NUnit
 
 open FMol.Tests.ParserTestHelper
 open FMol.Tests.SmilesGenerators
 open FMol.SmilesParserPrimitives
 
-
-[<PropertyAttribute>]
+[<Test>]
 let validHcountSucceeds() =
-    Prop.forAll (Arb.fromGen hCountGenerator) (testParserSucceedsWith hcount)
+    let hs = ("H", 1) :: ([0..9] |> List.map (fun h -> (String.Format("H{0}", h), h)))
+    Assert.IsTrue(testParserSucceedsWithAll hcount hs)
 
 [<PropertyAttribute>]
 let invalidHcountFails() =

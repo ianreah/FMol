@@ -10,7 +10,7 @@ open FMol.SmilesParserPrimitives
 
 [<Test>]
 let validElementSucceeds() =
-    testParserSucceedsWithAllOptions elementSymbol elementSymbols
+    Assert.IsTrue(testParserSucceedsWithAllOptions elementSymbol elementSymbols)
 
 [<PropertyAttribute>]
 let invalidElementFails() =

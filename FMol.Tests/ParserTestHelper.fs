@@ -28,3 +28,6 @@ let testParserFails parser input =
 // and for each option the result should simply be the input option
 let testParserSucceedsWithAllOptions parser options =
     allTestsAreTrue (testParserSucceedsWithInput parser) options
+
+let testParserSucceedsWithAll parser inputsWithExpected =
+    allTestsAreTrue (testParserSucceedsWith parser) inputsWithExpected
