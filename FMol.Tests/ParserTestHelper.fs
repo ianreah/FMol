@@ -29,5 +29,9 @@ let testParserFails parser input =
 let testParserSucceedsWithAllOptions parser options =
     allTestsAreTrue (testParserSucceedsWithInput parser) options
 
+// `inputsWithExpected` is a list of `(input, expected)` pairs
+// The parser should successfully parse each of the `inputs` and
+// for each `input` the result of the parser should match the given
+// `expected`.
 let testParserSucceedsWithAll parser inputsWithExpected =
     allTestsAreTrue (testParserSucceedsWith parser) inputsWithExpected
