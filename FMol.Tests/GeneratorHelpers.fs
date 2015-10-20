@@ -3,20 +3,17 @@
 open System
 open FsCheck
 
-let choiceGenerator options = gen {
+let chooseFrom options = gen {
     let! i = Gen.choose (0, List.length options-1)
     return (List.nth options i)
 }
 
-let notAnOptionGenerator options = 
-    let startsWithAChoice (s:string) = 
-        options |> List.exists (fun x -> s.StartsWith x)
-    Gen.suchThat (fun x -> x <> Unchecked.defaultof<string> && not (x |> startsWithAChoice)) Arb.generate<string>
-
-let notStartWithGenerator notAllowedAtStart = gen {
-    let! s = Gen.suchThat (fun x -> x <> Unchecked.defaultof<string>) Arb.generate<string>
-    return s.TrimStart(notAllowedAtStart)
-}
+let arbitraryStringExcluding options = 
+    let startsWithAny (s:string) = 
+        options |> List.exists (s.StartsWith)
+    let stringSuchThat predicate = 
+        Gen.suchThat (fun x -> x <> Unchecked.defaultof<string> && x |> predicate) Arb.generate<string>
+    stringSuchThat (startsWithAny >> not)
 
 let paddedNumberGenerator numberGenerator = gen {
     let! n = numberGenerator
