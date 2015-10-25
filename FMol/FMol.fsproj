@@ -53,6 +53,7 @@
     <Content Include="app.config" />
     <Compile Include="Parsers.fs" />
     <Compile Include="SmilesParserPrimitives.fs" />
+    <Compile Include="SmilesParserCombinations.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FParsec">

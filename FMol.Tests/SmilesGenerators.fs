@@ -103,3 +103,5 @@ let aromaticOrganicSymbols = ["b"; "c"; "n"; "o"; "s"; "p"]
 
 let aromaticOrganicSymbolGenerator = chooseFrom aromaticOrganicSymbols
 let notAnAromaticOrganicSymbolGenerator = arbitraryStringExcluding aromaticOrganicSymbols
+
+let symbolGenerator = Gen.oneof [elementSymbolGenerator; aromaticSymbolGenerator; Gen.constant "*"]
