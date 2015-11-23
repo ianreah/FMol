@@ -4,6 +4,7 @@ open System
 
 open FsCheck
 open FMol.Tests.GeneratorHelpers
+open FMol
 
 let private digits = ([ '0'..'9' ] |> List.map string)
 
@@ -105,3 +106,22 @@ let aromaticOrganicSymbolGenerator = chooseFrom aromaticOrganicSymbols
 let notAnAromaticOrganicSymbolGenerator = arbitraryStringExcluding aromaticOrganicSymbols
 
 let symbolGenerator = Gen.oneof [elementSymbolGenerator; aromaticSymbolGenerator; Gen.constant "*"]
+
+let private makeResultOptional (input, result) = input, Some(result)
+let private emptyMeansNoneGenerator = Gen.constant ("", None)
+let private emptyMeansZeroGenerator = Gen.constant ("", 0)
+
+// bracket_atom ::= ’[’ isotope? symbol chiral? hcount? charge? class? ’]’
+let bracketAtomGenerator = gen {
+    let! isotope = Gen.oneof [validIsotopeGenerator |> Gen.map makeResultOptional; emptyMeansNoneGenerator]
+    let! symbol = symbolGenerator
+    let! chiral = Gen.oneof [chiralityGenerator; Gen.constant ""]
+    let! hCount = Gen.oneof [hCountGenerator; emptyMeansZeroGenerator]
+    let! charge = Gen.oneof [chargeGenerator; emptyMeansZeroGenerator]
+    let! atomClass = Gen.oneof [validAtomClassGenerator |> Gen.map makeResultOptional; emptyMeansNoneGenerator]
+
+    let stringToParse = "[" + (isotope |> fst) + symbol + chiral + (hCount |> fst) + (charge |> fst) + (atomClass |> fst) + "]"
+    let atomResult = {Isotope = isotope |> snd; Symbol = symbol; Chiralty = chiral; hCount = hCount |> snd; Charge = charge |> snd; AtomClass = atomClass |> snd}
+
+    return stringToParse, atomResult
+}
