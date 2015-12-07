@@ -121,7 +121,7 @@ let bracketAtomGenerator = gen {
     let! atomClass = Gen.oneof [validAtomClassGenerator |> Gen.map makeResultOptional; emptyMeansNoneGenerator]
 
     let stringToParse = "[" + (isotope |> fst) + symbol + chiral + (hCount |> fst) + (charge |> fst) + (atomClass |> fst) + "]"
-    let atomResult = {Isotope = isotope |> snd; Symbol = symbol; Chiralty = chiral; hCount = hCount |> snd; Charge = charge |> snd; AtomClass = atomClass |> snd}
+    let atomResult = {Isotope = isotope |> snd; Symbol = symbol; Chiralty = chiral; hCount = Count(hCount |> snd); Charge = charge |> snd; AtomClass = atomClass |> snd}
 
     return stringToParse, atomResult
 }

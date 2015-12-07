@@ -15,6 +15,6 @@ let bracketAtom:Parser<Atom, unit> =
         let! charge = charge <|> preturn 0
         let! atomClass = opt atomClass
 
-        return {Isotope = isotope; Symbol = symbol; Chiralty = chiral; hCount = hCount; Charge = charge; AtomClass = atomClass}
+        return {Isotope = isotope; Symbol = symbol; Chiralty = chiral; hCount = Count(hCount); Charge = charge; AtomClass = atomClass}
     }
     between (pstring "[") (pstring "]" ) patom
