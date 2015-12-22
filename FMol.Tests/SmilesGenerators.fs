@@ -104,8 +104,9 @@ let aromaticOrganicSymbols = ["b"; "c"; "n"; "o"; "s"; "p"]
 
 let aromaticOrganicSymbolGenerator = chooseFrom aromaticOrganicSymbols
 let notAnAromaticOrganicSymbolGenerator = arbitraryStringExcluding aromaticOrganicSymbols
+let private unknownGenerator = Gen.constant "*"
 
-let symbolGenerator = Gen.oneof [elementSymbolGenerator; aromaticSymbolGenerator; Gen.constant "*"]
+let symbolGenerator = Gen.oneof [elementSymbolGenerator; aromaticSymbolGenerator; unknownGenerator]
 
 let private makeResultOptional (input, result) = input, Some(result)
 let private emptyMeansNoneGenerator = Gen.constant ("", None)
@@ -125,3 +126,11 @@ let bracketAtomGenerator = gen {
 
     return stringToParse, atomResult
 }
+
+let private makeAtom s =
+    s, {Isotope = None; Symbol = s; Chiralty = ""; hCount = Implicit; Charge = 0; AtomClass = None}
+
+let atomGenerator =
+    Gen.oneof [bracketAtomGenerator;
+        Gen.oneof [aliphaticOrganicSymbolGenerator; aromaticOrganicSymbolGenerator; unknownGenerator]
+            |> Gen.map makeAtom]
