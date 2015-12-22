@@ -10,4 +10,4 @@ open FMol.SmilesParserCombinations
 
 [<PropertyAttribute>]
 let validBracketAtomPasses() =
-    Prop.forAll (Arb.fromGen bracketAtomGenerator) (testParserSucceedsWith bracketAtom)
+    Prop.forAll (Arb.fromGen validBracketAtomGenerator) (testParserSucceedsWith bracketAtom)

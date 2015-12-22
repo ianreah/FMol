@@ -109,28 +109,48 @@ let private unknownGenerator = Gen.constant "*"
 let symbolGenerator = Gen.oneof [elementSymbolGenerator; aromaticSymbolGenerator; unknownGenerator]
 
 let private makeResultOptional (input, result) = input, Some(result)
-let private emptyMeansNoneGenerator = Gen.constant ("", None)
-let private emptyMeansZeroGenerator = Gen.constant ("", 0)
 
 // bracket_atom ::= ’[’ isotope? symbol chiral? hcount? charge? class? ’]’
-let bracketAtomGenerator = gen {
-    let! isotope = Gen.oneof [validIsotopeGenerator |> Gen.map makeResultOptional; emptyMeansNoneGenerator]
-    let! symbol = symbolGenerator
-    let! chiral = Gen.oneof [chiralityGenerator; Gen.constant ""]
-    let! hCount = Gen.oneof [hCountGenerator; emptyMeansZeroGenerator]
-    let! charge = Gen.oneof [chargeGenerator; emptyMeansZeroGenerator]
-    let! atomClass = Gen.oneof [validAtomClassGenerator |> Gen.map makeResultOptional; emptyMeansNoneGenerator]
+// ...everything except the symbol is optional
+let private optionalGenerator generator impliedValue =
+    Gen.oneof [generator; Gen.constant ("", impliedValue)]
 
-    let stringToParse = "[" + (isotope |> fst) + symbol + chiral + (hCount |> fst) + (charge |> fst) + (atomClass |> fst) + "]"
-    let atomResult = {Isotope = isotope |> snd; Symbol = symbol; Chiralty = chiral; hCount = Count(hCount |> snd); Charge = charge |> snd; AtomClass = atomClass |> snd}
-
-    return stringToParse, atomResult
+type AtomGeneratorParts = {
+    IsotopeGenerator: Gen<string * int option>
+    SymbolGenerator: Gen<string>
+    ChiraltyGenerator: Gen<string>
+    hCountGenerator: Gen<string * int>
+    ChargeGenerator: Gen<string * int>
+    AtomClassGenerator: Gen<string * int option>
 }
+
+let validAtomPartGenerators = {
+    IsotopeGenerator   = optionalGenerator (validIsotopeGenerator |> Gen.map makeResultOptional) None;
+    SymbolGenerator    = symbolGenerator;
+    ChiraltyGenerator  = Gen.oneof [chiralityGenerator; Gen.constant ""];
+    hCountGenerator    = optionalGenerator hCountGenerator 0;
+    ChargeGenerator    = optionalGenerator chargeGenerator 0;
+    AtomClassGenerator = optionalGenerator (validAtomClassGenerator |> Gen.map makeResultOptional) None
+}
+
+let bracketAtomGenerator partGenerators =
+    Gen.map6 (fun isotope symbol chiral hCount charge atomClass ->
+                let stringToParse = "[" + (isotope |> fst) + symbol + chiral + (hCount |> fst) + (charge |> fst) + (atomClass |> fst) + "]"
+                let atomResult = {Isotope = isotope |> snd; Symbol = symbol; Chiralty = chiral; hCount = Count(hCount |> snd); Charge = charge |> snd; AtomClass = atomClass |> snd}
+                stringToParse, atomResult)
+        partGenerators.IsotopeGenerator
+        partGenerators.SymbolGenerator
+        partGenerators.ChiraltyGenerator
+        partGenerators.hCountGenerator
+        partGenerators.ChargeGenerator
+        partGenerators.AtomClassGenerator
+
+let validBracketAtomGenerator = bracketAtomGenerator validAtomPartGenerators
 
 let private makeAtom s =
     s, {Isotope = None; Symbol = s; Chiralty = ""; hCount = Implicit; Charge = 0; AtomClass = None}
 
 let atomGenerator =
-    Gen.oneof [bracketAtomGenerator;
+    Gen.oneof [validBracketAtomGenerator;
         Gen.oneof [aliphaticOrganicSymbolGenerator; aromaticOrganicSymbolGenerator; unknownGenerator]
             |> Gen.map makeAtom]
