@@ -20,7 +20,7 @@ let outOfRangeIsotopeGenerator = gen {
     return invalidIsotope.ToString()
 } 
 
-let invalidIsotopeGenerator = arbitraryStringExcluding digits
+let invalidIsotopeGenerator = arbitraryStringExcluding ("-"::"+"::digits)
 
 let elementSymbols =
     [ "H"; "He"; "Li"; "Be";  "B";  "C";  "N";  "O";  "F"; "Ne"; "Na"; "Mg";
@@ -91,7 +91,7 @@ let validAtomClassGenerator = gen {
 }
 
 let invalidAtomClassGenerator = gen {
-    let! invalidAtomClass = arbitraryStringExcluding ("-"::digits)
+    let! invalidAtomClass = arbitraryStringExcluding ("-"::"+"::digits)
     return String.Format(":{0}", invalidAtomClass)
 }
 
