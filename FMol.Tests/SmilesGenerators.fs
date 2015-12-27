@@ -148,6 +148,24 @@ let bracketAtomGenerator partGenerators =
 
 let validBracketAtomGenerator = bracketAtomGenerator validAtomPartGenerators
 
+let bracketAtomGeneratorWithInvalidIsotope =
+    bracketAtomGenerator {validAtomPartGenerators with IsotopeGenerator = Gen.constant ("xxx", None)}
+
+let bracketAtomGeneratorWithInvalidSymbol =
+    bracketAtomGenerator {validAtomPartGenerators with SymbolGenerator = Gen.constant "xxx"}
+
+let bracketAtomGeneratorWithInvalidChiralty =
+    bracketAtomGenerator {validAtomPartGenerators with ChiraltyGenerator = Gen.constant "xxx"}
+
+let bracketAtomGeneratorWithInvalidHCount =
+    bracketAtomGenerator {validAtomPartGenerators with hCountGenerator = Gen.constant ("xxx", 0)}
+
+let bracketAtomGeneratorWithInvalidCharge = 
+    bracketAtomGenerator {validAtomPartGenerators with ChargeGenerator = Gen.constant ("xxx", 0)}
+
+let bracketAtomGeneratorWithInvalidAtomClass = 
+    bracketAtomGenerator {validAtomPartGenerators with AtomClassGenerator = Gen.constant ("xxx", None)}
+
 let private makeAtom s =
     s, {Isotope = None; Symbol = s; Chiralty = ""; hCount = Implicit; Charge = 0; AtomClass = None}
 
