@@ -107,6 +107,7 @@ let notAnAromaticOrganicSymbolGenerator = arbitraryStringExcluding aromaticOrgan
 let private unknownGenerator = Gen.constant "*"
 
 let symbolGenerator = Gen.oneof [elementSymbolGenerator; aromaticSymbolGenerator; unknownGenerator]
+let invalidSymbolGenerator = arbitraryStringExcluding ("*"::elementSymbols@aromaticSymbols)
 
 let private makeResultOptional (input, result) = input, Some(result)
 

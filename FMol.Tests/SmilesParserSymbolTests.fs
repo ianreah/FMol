@@ -11,3 +11,7 @@ open FMol.SmilesParserCombinations
 [<PropertyAttribute>]
 let validSymbolPasses() =
     Prop.forAll (Arb.fromGen symbolGenerator) (testParserSucceedsWithInput symbol)
+
+[<PropertyAttribute>]
+let invalidSymbolFails() =
+    Prop.forAll (Arb.fromGen invalidSymbolGenerator) (testParserFails symbol)
