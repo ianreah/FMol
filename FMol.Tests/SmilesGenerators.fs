@@ -173,3 +173,5 @@ let atomGenerator =
     Gen.oneof [validBracketAtomGenerator;
         Gen.oneof [aliphaticOrganicSymbolGenerator; aromaticOrganicSymbolGenerator; unknownGenerator]
             |> Gen.map makeAtom]
+
+let notUnknownOrOrganicGenerator = arbitraryStringExcluding ("["::"*"::aliphaticOrganicSymbols@aromaticOrganicSymbols)
